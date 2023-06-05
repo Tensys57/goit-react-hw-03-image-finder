@@ -5,8 +5,7 @@ import { getPhotos } from '../Service/PhotoService';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
-
-import css from './App.module.css';
+import { Button } from './Button/Button';
 
 export class App extends Component {
   state = {
@@ -22,6 +21,17 @@ export class App extends Component {
 
   onSubmit = query => {
     this.setState({ query });
+    if (this.state.query === query) {
+      return alert('Already shown');
+    }
+    this.setState({
+      query,
+      page: 1,
+      photos: [],
+      showBtn: false,
+      isEmpty: false,
+      error: '',
+    });
   };
 
   componentDidUpdate(_, prevState) {
@@ -58,20 +68,6 @@ export class App extends Component {
     this.setState({ largeImageURL });
   };
 
-  onSubmit = query => {
-    if (this.state.query === query) {
-      return alert('Already shown');
-    }
-    this.setState({
-      query,
-      page: 1,
-      photos: [],
-      showBtn: false,
-      isEmpty: false,
-      error: '',
-    });
-  };
-
   render() {
     const { hits, isLoading, isEmpty, showBtn, largeImageURL, error } =
       this.state;
@@ -91,15 +87,7 @@ export class App extends Component {
         {hits.length > 0 && (
           <ImageGallery photos={hits} openModal={this.showModal} />
         )}
-        {showBtn && (
-          <button
-            type="button"
-            className={css.Button}
-            onClick={this.handleClick}
-          >
-            Load more...
-          </button>
-        )}
+        {showBtn && <Button handleClick={this.handleClick} />}
         {isLoading && <Loader />}
         {largeImageURL && (
           <Modal

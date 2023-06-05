@@ -6,7 +6,7 @@ export const ImageGallery = ({ photos, openModal }) => {
     <ul className={css.ImageGallery}>
       {photos.map(photo => (
         <ImageGalleryItem
-          id={photo.id}
+          key={photo.id}
           webformatURL={photo.webformatURL}
           tags={photo.tags}
           openModal={openModal}
