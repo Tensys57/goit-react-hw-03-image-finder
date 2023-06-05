@@ -59,7 +59,8 @@ export class App extends Component {
   };
 
   render() {
-    const { hits, isLoading, isEmpty, showBtn, largeImageURL } = this.state;
+    const { hits, isLoading, isEmpty, showBtn, largeImageURL, error } =
+      this.state;
     return (
       <div
         style={{
@@ -93,6 +94,8 @@ export class App extends Component {
             closeModal={this.showModal}
           />
         )}
+        {isEmpty && <p textAlign="center">Sorry. There are no images ... 😭</p>}
+        {error && <p textAlign="center">Sorry. {error} ... 😭</p>}
       </div>
     );
   }
