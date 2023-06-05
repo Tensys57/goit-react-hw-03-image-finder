@@ -18,7 +18,6 @@ export class Modal extends Component {
 
   handleKeyDown = ev => {
     if (ev.key === 'Escape') {
-      console.log('ev.key', ev.key);
       this.props.closeModal('');
     }
   };

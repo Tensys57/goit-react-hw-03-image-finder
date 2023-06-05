@@ -58,6 +58,20 @@ export class App extends Component {
     this.setState({ largeImageURL });
   };
 
+  onSubmit = query => {
+    if (this.state.query === query) {
+      return alert('Already shown');
+    }
+    this.setState({
+      query,
+      page: 1,
+      photos: [],
+      showBtn: false,
+      isEmpty: false,
+      error: '',
+    });
+  };
+
   render() {
     const { hits, isLoading, isEmpty, showBtn, largeImageURL, error } =
       this.state;
@@ -94,8 +108,8 @@ export class App extends Component {
             closeModal={this.showModal}
           />
         )}
-        {isEmpty && <p textAlign="center">Sorry. There are no images ... 😭</p>}
-        {error && <p textAlign="center">Sorry. {error} ... 😭</p>}
+        {isEmpty && <p>Sorry. There are no images ... 😭</p>}
+        {error && <p>Sorry. {error} ... 😭</p>}
       </div>
     );
   }
