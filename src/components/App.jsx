@@ -6,6 +6,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
 import { Button } from './Button/Button';
+import css from '../components/App.module.css';
 
 export class App extends Component {
   state = {
@@ -20,14 +21,13 @@ export class App extends Component {
   };
 
   onSubmit = query => {
-    this.setState({ query });
     if (this.state.query === query) {
       return alert('Already shown');
     }
     this.setState({
       query,
       page: 1,
-      photos: [],
+      hits: [],
       showBtn: false,
       isEmpty: false,
       error: '',
@@ -72,17 +72,7 @@ export class App extends Component {
     const { hits, isLoading, isEmpty, showBtn, largeImageURL, error } =
       this.state;
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
+      <div className={css.container}>
         <Searchbar onSubmit={this.onSubmit} />
         {hits.length > 0 && (
           <ImageGallery photos={hits} openModal={this.showModal} />
@@ -96,8 +86,10 @@ export class App extends Component {
             closeModal={this.showModal}
           />
         )}
-        {isEmpty && <p>Sorry. There are no images ... 😭</p>}
-        {error && <p>Sorry. {error} ... 😭</p>}
+        {isEmpty && (
+          <p className={css.warning}>Sorry. There are no images ... 😭</p>
+        )}
+        {error && <p className={css.warning}>Sorry. {error} ... 😭</p>}
       </div>
     );
   }

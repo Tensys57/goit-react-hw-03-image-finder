@@ -19,7 +19,7 @@ export const ImageGallery = ({ photos, openModal }) => {
   );
 };
 
-ImageGallery.propType = {
+ImageGallery.propTypes = {
   photos: PropTypes.array.isRequired,
   openModal: PropTypes.func.isRequired,
 };

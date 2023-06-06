@@ -13,7 +13,7 @@ export class Searchbar extends Component {
 
   onSubmitHandler = ev => {
     ev.preventDefault();
-    if (!this.state.search.trim) {
+    if (!this.state.search.trim()) {
       return alert('You need to put something for search...');
     }
     this.props.onSubmit(this.state.search);
@@ -42,6 +42,6 @@ export class Searchbar extends Component {
   }
 }
 
-Searchbar.propType = {
+Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
